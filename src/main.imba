@@ -4,20 +4,25 @@ tag Countdown
 	css button mr:1
 	css h1 m:0 ta:center
 	css .red bg:red
-	
-	count = 3
-	<self autorender=1fps>
-		<div.red=(count < 1) [p:3]>
-			if count > 0
-				minute = String(Math.floor count/60).padStart(2,'0')
-				second = String(count % 60).padStart(2,'0')
+
+	def getEndTime minute
+		return Date.now! + (minute * 60_000) # ms
+
+	endTime = getEndTime 3
+	<self autorender=2fps>
+		let endTimeStr = new Date(endTime).toLocaleTimeString!
+		let timeLeft = endTime - Date.now!
+		<div.red=(timeLeft < 1) [p:3]>
+			<div[ta:center]> "End {endTimeStr}"
+			if timeLeft > 0
+				let second = String(Math.floor(timeLeft / 1000) % 60).padStart(2,'0')
+				let minute = String(Math.floor(timeLeft /60_000)).padStart(2,'0')
 				<h1> "{minute}:{second}"
-				count -= 1
 			else
 				<h1> "Time up"
-			<button @click=(count=30*60)> "30m"
-			<button @click=(count=45*60)> "45m"
-			<button @click=(count=60*60)> "60m"
+			<button @click=(endTime = getEndTime 30)> "30m"
+			<button @click=(endTime = getEndTime 45)> "45m"
+			<button @click=(endTime = getEndTime 60)> "60m"
 
 tag App
 	<self @click=popup!>
