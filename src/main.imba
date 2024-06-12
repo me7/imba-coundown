@@ -1,4 +1,4 @@
-global css body c:warm2 bg:warm8 ff:sans inset:0 d:vcc
+global css body c:warm2 bg:warm8 ff:sans inset:0 d:vtl
 
 tag Countdown
 	css button mr:1
@@ -20,12 +20,7 @@ tag Countdown
 			<button @click=(count=60*60)> "60m"
 
 tag App
-	# def popup
-	# 	a = window.open(document.location.href, 'mini', width=200, height=240)
-	# 	a.resizeTo(250, 170)
 	<self @click=popup!>
 		<Countdown>
-		# <button @click=resize!> "resize"
-		# window.screen.availWidth
 
 imba.mount <App>
