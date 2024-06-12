@@ -17,10 +17,15 @@ tag Countdown
 				<h1> "Time up"
 			<button @click=(count=30*60)> "30m"
 			<button @click=(count=45*60)> "45m"
-			<button @click=(count=60*60)> "69m"
+			<button @click=(count=60*60)> "60m"
 
 tag App
-	<self>
+	# def popup
+	# 	a = window.open(document.location.href, 'mini', width=200, height=240)
+	# 	a.resizeTo(250, 170)
+	<self @click=popup!>
 		<Countdown>
+		# <button @click=resize!> "resize"
+		# window.screen.availWidth
 
 imba.mount <App>
